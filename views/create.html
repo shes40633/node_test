@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="#">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/create.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="FormCreate">
+            <div class="input-group input-group-lg Account">
+                <span class="input-group-text">帳號</span>
+                <input name="username" class="form-control" id="AccountVal" type="text"
+                    onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+            </div>
+            <div class="input-group input-group-lg  Password">
+                <span class="input-group-text">密碼</span>
+                <input type="password" class="form-control" id="PasswordVal">
+            </div>
+            <div class="input-group input-group-lg  CheckPassword">
+                <span class="input-group-text">確認密碼</span>
+                <input type="password" class="form-control" id="CheckPasswordVal">
+            </div>
+            <div class="Send">
+                <button id='Send_bt'>送出</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+    // async function digestMessage(message) {
+    //     const encoder = new TextEncoder();
+    //     const data = encoder.encode(message);
+    //     const hash = await crypto.subtle.digest('SHA-256', data);
+    //     const hashArray = Array.from(new Uint8Array(hash));
+    //     const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+    //     return hashHex;
+    // }
+    $("#Send_bt").click(function () {
+        var Account = $("#AccountVal").val();
+        var Password = $("#PasswordVal").val();
+        var CheckPassword = $("#CheckPasswordVal").val();
+
+        if (Password == CheckPassword) {
+            var SendPW = CheckPassword;
+            // var CorrectPW = digestMessage(Password);
+            // CorrectPW.then((value) => {
+                // var SendPW = value;
+                // console.log(value);
+
+                $.ajax({
+                    url: "/user/CreateData",
+                    type: 'POST',
+                    async: false,
+                    data: {
+                        'Account': Account,
+                        'Password': SendPW
+                    },
+                    success: function (data) {
+                        window.location.href = "/User/login";
+
+                    },
+                    error: function (data) {
+
+                    }
+                });
+
+            // });
+
+        } else {
+            alert('密碼不相同');
+        }
+
+
+    });
+
+
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserData {
+    width: 100%;
+    height: 100%;
+}
+
+.Account {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Password {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Send{
+    height: 30px;
+    width: 100%;
+    text-align:center
+}
+
+.Create{
+    height: 30px;
+    width: 100%;
+    text-align:center;
+    margin-top: 20px ;
+}
